@@ -11,7 +11,7 @@ public class p {
                 System.out.println("No puede ser inferior a 1 ni susperior a 50");
             }
         }while (numEnt < 1 || numEnt > 50);
-
+        System.out.println("e");
 
     }
 }
