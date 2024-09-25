@@ -1,6 +1,7 @@
-import 'package:verdugodart/verdugodart.dart' as verdugodart;
+import 'verdugodart/verdugodart.dart';
 
 void main(List<String> arguments) {
-
-  print('Hello world: ${verdugodart.calculate()}!');
+  var play = Player();
+  // Se continua el juego hasta terminar la partida
+  play.continueGame();
 }

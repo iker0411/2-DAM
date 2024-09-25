@@ -6,6 +6,7 @@ fun main(args: Array<String>) {
     println("Argumentos de entrada al main: ")
     args.forEach {
         println("$it, ")
+
     }
     println("\n-----------------------------------")
     arrays()
