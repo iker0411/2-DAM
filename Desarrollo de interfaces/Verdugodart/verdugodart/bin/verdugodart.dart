@@ -1,7 +1,8 @@
-import 'verdugodart/verdugodart.dart';
+//import 'verdugodart/verdugodart.dart';
+
+import 'package:verdugodart/Game.dart';
 
 void main(List<String> arguments) {
-  var play = Player();
-  // Se continua el juego hasta terminar la partida
-  play.continueGame();
+  Game.introducirPalabraClave();
+  Game.devolverPalabraClave();
 }
