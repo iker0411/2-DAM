@@ -1,18 +1,16 @@
 import 'dart:io';
 
-import 'package:verdugodart/Game.dart';
+//import 'package:verdugodart/Game.dart';
 
 class Player {
   String palabraUsuario = "";
 
-  void leerPorTeclado(String palabra) {
-    palabra = stdin.readLineSync()!;
+  void leerPorTeclado() {
+    palabraUsuario = stdin.readLineSync()!;
   }
 
-  void devolverPalabraClave() {
-    print(palabraUsuario);
+  String devolverPalabraClave() {
+    return(palabraUsuario);
   }
-  void compararLetra(String palabraUsuario) {
-    
-  }
+ 
 }
