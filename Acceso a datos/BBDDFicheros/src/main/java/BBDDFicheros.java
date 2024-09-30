@@ -73,7 +73,7 @@ public class BBDDFicheros {
     public Map<String, String> recuperar(String valorClave) {
         int pos = 0;
         boolean encontrado = false;
-        Map<String, String> result;
+        Map<String, String> result = null; //he puesto = null, para corregir el error que había
         try(FileInputStream fis = new FileInputStream(this.nombreFich)){
             result = null;
             //recorremos todos los registros mientras no hayamos encontrado una ocurrencia del valorClave
