@@ -1,7 +1,23 @@
+import NetworkResult.Loading.fetchDataFromNetwork
 import java.util.*
 
 
 fun main(args: Array<String>) {
+    // EN EL MAIN.
+//Simulamos una operaciones de red y procesamos los resultados
+    /*do{
+        val result = fetchDataFromNetwork()
+        handleNetworkResult(result)
+    } while (result is NetworkResult.Loading)*/
+    val designer1 = Designer("iker",23)
+    designer1.introducePerson()
+
+    val prog1 = Programer("Iker", 19, ProgrammingLang.JAVA)
+    prog1.introducePerson()
+    prog1.createProgram("Coche Turbo 2.0")
+    prog1.createProgram("Futbol Stadisticos")
+    prog1.showPrograms()
+    prog1.introducePerson()
     feedTheFish()
     println("Argumentos de entrada al main: ")
     args.forEach {
