@@ -1,7 +1,5 @@
 import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +73,6 @@ public class BBDDFicheros {
         boolean encontrado = false;
         Map<String, String> result = null; //he puesto = null, para corregir el error que había
         try(FileInputStream fis = new FileInputStream(this.nombreFich)){
-            result = null;
             //recorremos todos los registros mientras no hayamos encontrado una ocurrencia del valorClave
             while (pos < this.numReg && !encontrado){
                 byte[] buffer = new byte[this.longReg];
@@ -115,4 +112,73 @@ public class BBDDFicheros {
         }
 
     }
+    /**
+     * Insertar un nuevo registro en el fichero, siempre al final de éste.
+     * @param reg Registro a insertar
+     * @return posición en la que hemos insertado el registro o -1 en caso de que no se haya podido insertar
+     * porque ya existe un registro que tiene el mismo valor en el campoclave
+     * @throws IOException
+     */
+    public long insertar(HashMap<String,String> reg) throws IOException{
+        String valorCampoClave = reg.get(this.campoClave);
+        if (recuperar(valorCampoClave) != null){//Comprobamos si ya existe un registro con el mismo valor para el campo clave que el queremos insertar (No está permitido)
+            return -1;
+        }
+
+        try(FileOutputStream fos = new FileOutputStream(nombreFich, true)){
+            for (Map.Entry<String,Integer> campo: campos.entrySet()) {
+                int longCampo = campo.getValue();
+                String valorCampo = reg.get(campo.getKey());
+                if (valorCampo == null){
+                    valorCampo = "";
+                }
+
+                String valorCampoForm = String.format("%1$-" + longCampo + "s", valorCampo); //devuelve el valor del 1er argumento en un String con longitud "longCampo" y alineado a la izquierda (gracias al uso de "-")
+                fos.write(valorCampoForm.getBytes("UTF-8"), 0, longCampo);
+            }
+        }catch (IOException e){
+            System.out.println("Error de E/S: " + e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        this.numReg++;
+        return  this.numReg-1;
+    }
+
+    /*public boolean modificar(String valorClave, String nombreCampo, String valorCampo) throws  IOException{
+        if(nombreCampo.equals(this.campoClave)){
+            System.out.println("No se puede modificar el campo clave: " + nombreCampo);
+            return false;
+        }
+        int pos = 0;
+        boolean encontrado = false;
+        RandomAccessFile raf = new RandomAccessFile(this.nombreFich, "rws");
+        while(pos < this.numReg && !encontrado){
+            byte buffer[] = new byte[this.longReg];
+            if (raf.read(buffer, 0, this.longReg) < this.longReg){
+                return false;
+            }
+            String unValorClave = recuperarValorCampoClave(buffer);
+
+            if(valorClave.equals(unValorClave)){
+                int offsetCampo = 0;
+                encontrado = true;
+                raf.seek(pos*longReg);
+                for(Map.Entry<String,Integer> campo: campos.entrySet()){
+                    String unCampo = campo.getKey();
+                    int longCampo = campo.getValue();
+                    if(nombreCampo.equals(unCampo)){
+                        raf.skipBytes(offsetCampo);
+                        String valorCampoForm = String.format("%1$-" + longCampo + "s", valorCampo);
+                        raf.write(valorCampoForm.getBytes("UTF-8"), 0, longCampo);
+                        break;
+                    }
+                    offsetCampo += longCampo;
+                }
+            }
+            pos++;
+        }
+        return encontrado;
+
+    }*/
 }
