@@ -1,109 +1,107 @@
-import NetworkResult.Loading.fetchDataFromNetwork
 import java.util.*
 
 
 fun main(args: Array<String>) {
-    // EN EL MAIN.
-//Simulamos una operaciones de red y procesamos los resultados
-    /*do{
-        val result = fetchDataFromNetwork()
-        handleNetworkResult(result)
-    } while (result is NetworkResult.Loading)*/
-    val designer1 = Designer("iker",23)
+    //basics()
+
+    //medium()
+
+    // Ejemplo:
+    // var engine1 = Car.Engine(3000)
+    // var myCar = Car("Dodge", "Challenger", 2023, engine1)
+
+    // Aqui llamamos al objeto Engine dentro del objeto Car
+    var myCar = Car("Dodge", "Challenger", 2023, Car.Engine(3000))
+    val insurance1 = myCar.Insurance(InsuranceCarrier.MAPFRE, 500f)
+
+    println(myCar.toString())
+    println(insurance1.toString())
+
+    //Simulamos una operaciones de red y procesamos los resultados
+//    do {
+//        val result = fetchDataFromNetwork()
+//        handleNetworkResult(result)
+//    } while (result is NetworkResult.Loading)
+
+    val designer1 = Designer("iker", 19)
     designer1.introducePerson()
 
-    val prog1 = Programer("Iker", 19, ProgrammingLang.JAVA)
+    val prog1 = Programer("iker", 19, ProgramingLang.JAVA)
+    // No tiene programas creados
     prog1.introducePerson()
-    prog1.createProgram("Coche Turbo 2.0")
+    prog1.createProgram("Coche Turvo 2.0")
     prog1.createProgram("Futbol Stadisticos")
     prog1.showPrograms()
     prog1.introducePerson()
-    feedTheFish()
-    println("Argumentos de entrada al main: ")
-    args.forEach {
-        println("$it, ")
 
-    }
-    println("\n-----------------------------------")
-    arrays()
-    println("\n-----------------------------------")
-    var x = 2
-    val fixed: Float = 5f
-    x = x.times(40)
-//    val y = fixed.plus(10) + 5 * 4
-    val y = 80
-    println("hola mundo, x=$x y=$y")
-    println(sayhello());
-    if (x > y) {
-        println("x es mayor que y")
-    } else if (x == y.toInt()) {
-        println("x e y son iguales")
-    } else {
-        println("y es mayor que x")
-    }
-    when {
-        (fixed > 50) -> println("X e Y son iguales")
-        (x > y) -> println("X es mayor que y")
-        (x < y) -> println("X es menor que Y")
-        else -> println(" X e Y son iguales")
-    }
-    var nombre: String? = null
-//println ("hola $nombre, mi nombre tiene ${nombre?.length} letras")
-    println("Dime tu nombre:")
-    nombre = readlnOrNull()
-
-    nombre?.let {
-        println("hola $it, mi nombre tiene ${it.length} letras.")
-    } ?: println("El nombre es nulo")
 }
 
+fun medium() {
+    // Argumentos de entrada al main
+//    args.forEach {
+//        print("$it, ")
+//    }
 
-fun arrays() {
-    val school = listOf("mackerel", "trout", "halibut")
+    // listOf() -> es de solo lectura y no es mutable (sea constante o no)
+    val school: List<String> = listOf("mackerel", "trout", "halibut")
 
-    println("Los elementos de una lista son: ")
+    print("Lo elementos de la lista son [foreach]:")
     school.forEach {
-        println("$it, ")
+        print("$it, ")
     }
 
+    // mutableListOf() -> es una lista modificable
     val myList = mutableListOf("tuna", "salmon", "shark")
-    myList.add(myList.size - 1, "sardina")
-    myList.add(myList.lastIndex, "boquerones")
-    println(myList)
+
+    // en estos casos se añade siempre al penultimo elemento
+    myList.add(myList.size-1,"sardina")
+    myList.add(myList.lastIndex,"boquerones")
+
+    println("\n$myList")
+
+    print("Lo elementos de la lista son: ")
+//    for ((index, element) in myList.withIndex()) {
+//        if (index != myList.lastIndex) {
+//            if (index == myList.lastIndex-1) {
+//                print("$element y")
+//            } else {
+//                print("$element, ")
+//            }
+//        } else {
+//            print(" $element.")
+//        }
+//    }
+
     for ((index, element) in myList.withIndex()) {
         when {
-            index == myList.lastIndex - 1 -> print("y $element y ")
-            index == myList.lastIndex -> print("$element, ")
-            else -> print("$element. ")
+            index == myList.lastIndex-1 -> print("$element y")
+            index != myList.lastIndex -> print("$element, ")
+            else -> print(" $element.")
         }
     }
 
-    println(sumaEnteras(3,8))
+    println("\n suma 3 + 4 = ${sumaInt(3, 4)}")
 
-    val temperatura = 10
-    val  isHot = if (temperatura > 50 ) true else false
-    println(isHot)
-    val temperature = 10
-    val message = "The water temperature is ${ if (temperature > 50) "too warm" else "OK" }."
-    println(message)
-}
- fun sumaEnteras(a : Int, b : Int) : Int{
-    return a+b
- }
-fun sayhello(): String {
-    return "Hello World!"
+    print(fishFood(randomDay()))
+
+    var dirtyLevel = 20
+    // Primera versión
+    //val waterFilter = { dirty : Int -> dirty / 2}
+    // Segunda versión
+    val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
+    println(waterFilter(dirtyLevel))
+
+    println(updateDirty(30, waterFilter))
+
+    println(updateDirty(15, ::increaseDirty))
 }
 
-/*fun feedTheFish() {
-    val day = randomDay()
-    val food =
-    println ("Today is $day and the fish eat $food")
-}*/
-fun randomDay() : String {
-    val week = arrayOf ("Monday", "Tuesday", "Wednesday", "Thursday",
-        "Friday", "Saturday", "Sunday")
-    return week[Random().nextInt(week.size)]
+fun increaseDirty( start: Int ) = start + 1
+
+fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
+    return operation(dirty)
 }
+
 fun fishFood (day : String) : String {
     var food = ""
     when (day) {
@@ -115,16 +113,97 @@ fun fishFood (day : String) : String {
         "Saturday" -> food = "lettuce"
         "Sunday" -> food = "plankton"
     }
-    return food
+    return "Today is $day and food is $food"
 }
 
 fun feedTheFish() {
     val day = randomDay()
-    val food = fishFood(day)
-
+    val food = "pellets"
     println ("Today is $day and the fish eat $food")
 }
-fun swim(speed: String = "fast") {
-    println("swimming $speed")
+
+fun randomDay() : String {
+    val week = arrayOf ("Monday", "Tuesday", "Wednesday", "Thursday",
+        "Friday", "Saturday", "Sunday")
+    return week[Random().nextInt(week.size)]
+}
+
+fun sumaInt(x: Int, y: Int): Int {
+    return x + y
+}
+
+// Por defecto las funciones pública
+fun basics() {
+    // println(sayHello())
+    // println("Program argument: ${args.joinToString()}")
+
+    // Variable normal tipada
+    // El tipado es automático por defecto según el contenido
+    var x: Int = 2
+
+    // Constante
+    // Variables Float -> 3.5f (Siempre f al final de número)
+    val fixed: Float = 3.75f
+
+    // Multiplica
+    x = x.times(4) // = 8
+
+    // Suma -> plus(10)
+    // toInt() -> redondea hacia abajo siempre
+    x = (fixed.plus(10).toInt()) + x
+
+    // Para imprimir variables por pantalla $variable entre ""
+    println("x = $x, fixed = $fixed")
+    /*
+    if (x > fixed) {
+        println("$x es mayor que $fixed")
+    } else if (x < fixed) {
+        println("$x es menor que $fixed")
+    } else {
+        println("$x es igual que $fixed")
+    }
+    */
+
+    /*
+     * Es el equivalente al switch en otros lenguajes
+     * otro ejemplo:
+     * when (condition) {
+     *      0 -> println("lo que sea")
+     *      in 1..39 -> println("lo que sea 2")
+     *      else -> println("lo que queda")
+     * }
+     */
+    when {
+        // Así podemos añadir más instrucciones
+        x > fixed -> {
+            println("$x es mayor que $fixed")
+        }
+        x < fixed -> println("$x es menor que $fixed")
+        else -> println("$x es igual que $fixed")
+    }
+
+    var name: String? = null
+
+    // readln() -> Devuelve un String (no puede ser nulo en el uso de fichero)
+    // readLine() -> Devuelve un String (puede ser nulo en el uso de fichero)
+
+    println("Dime tu nombre:")
+    name = readLine()
+
+    //name = "pepe"
+
+    /**
+     * Es la manera de llamar a variables que puedan ser nulas
+     * sustituye el if (name != null)
+     */
+    name?.let {
+        println("Hola $it, mi nombre ${it.length} letras")
+
+        // ?: -> es el operador elvis
+    } ?: println("Mi nombre es nulo")
+}
+
+fun sayHello(): String {
+    return "Hello world! 2"
 }
 
