@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -129,11 +128,11 @@ public class BBDDFicheros {
         }
     }
 
-    public long insertar(HashMap<String, String> reg) throws IOException {
+    public void insertar(HashMap<String, String> reg) throws IOException {
         String valorCampoClave = reg.get(this.campoClave);
         if (recuperar(valorCampoClave) != null) {//Comprobamos si ya existe un registro con el mismo valor para el campo clave que el queremos insertar (No está permitido)
             System.err.println("No se puede insertar el registro debido a que ya existe uno con esta clave primaria - " + valorCampoClave);
-            return -1;
+            return;
         }
 
         try (FileOutputStream fos = new FileOutputStream(nombreFich, true)) {
@@ -145,7 +144,7 @@ public class BBDDFicheros {
                 }
 
                 String valorCampoForm = String.format("%1$-" + longCampo + "s", valorCampo); //devuelve el valor del 1er argumento en un String con longitud "longCampo" y alineado a la izquierda (gracias al uso de "-")
-                fos.write(valorCampoForm.getBytes("UTF-8"), 0, longCampo);
+                fos.write(valorCampoForm.getBytes(StandardCharsets.UTF_8), 0, longCampo);
             }
         } catch (IOException e) {
             System.out.println("Error de E/S: " + e.getMessage());
@@ -153,6 +152,5 @@ public class BBDDFicheros {
             e.printStackTrace();
         }
         this.numReg++;
-        return this.numReg - 1;
     }
 }
