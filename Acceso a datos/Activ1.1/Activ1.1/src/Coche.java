@@ -1,4 +1,6 @@
-public class Coche {
+public class Coche implements Comparable<Coche>{
+
+
     private String matricula;
     private String marca;
     private String modelo;
@@ -33,4 +35,13 @@ public class Coche {
         this.marca = marca;
     }
 
+    @Override
+    public String toString() {
+        return  matricula + " " + marca + " " + modelo;
+    }
+
+    @Override
+    public int compareTo(Coche o) {
+        return 0;
+    }
 }
