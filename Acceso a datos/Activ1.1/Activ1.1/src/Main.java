@@ -2,19 +2,38 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("==========Menú=============");
-        System.out.println("1.Cargar información");
-        System.out.println("2.Insertar un coche");
-        System.out.println("3.Ordenar por matrícula");
-        System.out.println("4.Borrar un registro");
-        System.out.println("5.Modificar un registro");
-        System.out.println("Eliga una opción:");
+        //Solucionar error al pulsar 6 y mirara si quieres que siempre aparezca un bucle
         Scanner sc = new Scanner(System.in);
-        int opcion = sc.nextInt();
-        if (opcion == 1) {
-            BBDDFicheros.cargarInforma();
-        } else {
-            System.out.println("Gracia por utiliza este programa");
-        }
+        int opcion;
+        do {
+            System.out.println("==========Menú=============");
+            System.out.println("1.Cargar información");
+            System.out.println("2.Insertar un coche");
+            System.out.println("3.Ordenar por matrícula");
+            System.out.println("4.Borrar un registro");
+            System.out.println("5.Modificar un registro");
+            System.out.println("6.Salir");
+            System.out.println("Eliga una opción:");
+            opcion = sc.nextInt();
+            switch (opcion) {
+                case 1:
+                    BBDDFicheros.cargarInforma("C:\\Users\\ikerM\\Desktop\\Instituto\\2DAM\\Acceso a datos\\Activ1.1\\Activ1.1\\BBDDCoches.csv");
+                    break;
+                case 2:
+                    BBDDFicheros.insertar();
+                    break;
+                case 3:
+                    BBDDFicheros.ordenarFichero();
+                    break;
+                case 4:
+                    BBDDFicheros.borrarRegistro();
+                    break;
+                default:
+                    System.out.println("Opcion no valida, seleccione una opción numerica del 1 al 6");
+                    break;
+            }
+        } while (opcion != 6);
+        System.out.println("Gracias por utilizar este programa, ads :)");
+        sc.close();
     }
 }
