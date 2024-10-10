@@ -39,7 +39,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alumno/Desktop/2-DAM/2-DAM/Acceso a datos/Activ1.1",
+    "last_opened_file_path": "C:/Users/alumno/Desktop/2DAM/2DAM/Acceso a datos/Activ1.1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -77,6 +77,7 @@
       <workItem from="1728384787295" duration="973000" />
       <workItem from="1728398259603" duration="392000" />
       <workItem from="1728454836389" duration="58000" />
+      <workItem from="1728561250140" duration="14000" />
     </task>
     <servers />
   </component>
