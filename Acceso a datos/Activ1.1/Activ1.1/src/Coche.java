@@ -35,13 +35,22 @@ public class Coche implements Comparable<Coche>{
         this.marca = marca;
     }
 
+    /**
+     *Este método sobrescribe el método toString de la clase Object para proporcionar
+     *una representación legible de la instancia de Coche, mostrando la matrícula,
+     *la marca y el modelo del coche separados por espacios.
+     *<p>
+     *Resumen: Devuelve una representación en forma de cadena del objeto Coche.
+     * **/
     @Override
     public String toString() {
+        // Devuelve la matrícula, la marca y el modelo del coche como una cadena.
         return  matricula + " " + marca + " " + modelo;
     }
 
     @Override
     public int compareTo(Coche o) {
-        return 0;
+        // Compara la matrícula de este coche con la matrícula del coche dado.
+        return this.matricula.compareTo(o.matricula);
     }
 }

@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //Solucionar error al pulsar 6 y mirara si quieres que siempre aparezca un bucle
         Scanner sc = new Scanner(System.in);
         int opcion;
         do {
             menu();
             opcion = sc.nextInt();
+            sc.nextLine();
             switch (opcion) {
                 case 1:
                     BBDDFicheros.cargarInforma("C:\\Users\\ikerM\\Desktop\\Instituto\\2DAM\\Acceso a datos\\Activ1.1\\Activ1.1\\BBDDCoches.csv");
@@ -21,12 +21,18 @@ public class Main {
                 case 4:
                     BBDDFicheros.borrarRegistro();
                     break;
+                case 5:
+                    BBDDFicheros.modificarRegistro();
+                    break;
                 default:
                     System.out.println("Gracias por utilizar este programa, ads :)");
                     break;
             }
         } while (opcion != 6);
+        // Cierra el objeto Scanner.
         sc.close();
+        // Cierra el escáner de la clase BBDDFicheros.
+        BBDDFicheros.cerrarEscaner();
     }
 
     public static void menu() {
