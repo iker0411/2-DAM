@@ -93,10 +93,28 @@ public class BBDDFicheros {
    }
 
    public static void borrarRegistro(){
+       System.out.println("¿Cual registro quieres borrar?");
+       System.out.println("1.Matricula");
+       System.out.println("2.Posición");
+       int in = sc.nextInt();
+       if (in == 1){
+            String matricula = leerCadena("Introduce la matricula del coche, que quieras borrar ");
+
+       }else if (in == 2){
+           int pos = leerEntero("Introduce la posicion que quieras borrar ");
+       }else {
+           System.out.println("Opción invalida, selecciona el 1 o el 2");
+       }
+   }
+
+
+
+    //Metodos Auxiliares
+   public static void borrarRegistroMatricula(){
+        List<Coche> coches = recorrerCSV("Coche.dat");
 
    }
 
-    //Metodos Auxiliares
     public static int leerEntero(String mensaje) {
         System.out.println(mensaje + ": ");
         return Integer.parseInt(sc.nextLine());

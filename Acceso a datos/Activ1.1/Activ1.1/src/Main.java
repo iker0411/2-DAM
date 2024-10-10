@@ -6,14 +6,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcion;
         do {
-            System.out.println("==========Menú=============");
-            System.out.println("1.Cargar información");
-            System.out.println("2.Insertar un coche");
-            System.out.println("3.Ordenar por matrícula");
-            System.out.println("4.Borrar un registro");
-            System.out.println("5.Modificar un registro");
-            System.out.println("6.Salir");
-            System.out.println("Eliga una opción:");
+            menu();
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
@@ -29,11 +22,21 @@ public class Main {
                     BBDDFicheros.borrarRegistro();
                     break;
                 default:
-                    System.out.println("Opcion no valida, seleccione una opción numerica del 1 al 6");
+                    System.out.println("Gracias por utilizar este programa, ads :)");
                     break;
             }
         } while (opcion != 6);
-        System.out.println("Gracias por utilizar este programa, ads :)");
         sc.close();
+    }
+
+    public static void menu() {
+        System.out.println("==========Menú=============");
+        System.out.println("1.Cargar información");
+        System.out.println("2.Insertar un coche");
+        System.out.println("3.Ordenar por matrícula");
+        System.out.println("4.Borrar un registro");
+        System.out.println("5.Modificar un registro");
+        System.out.println("6.Salir");
+        System.out.println("Eliga una opción:");
     }
 }
